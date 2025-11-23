@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Filter</title>
+</head>
+<body>
+
+<h2>Product Filter</h2>
+
+<input type="text" id="search" placeholder="Search product">
+<br><br>
+
+<button onclick="filterProducts('all')">All</button>
+<button onclick="filterProducts('electronics')">Electronics</button>
+<button onclick="filterProducts('clothing')">Clothing</button>
+
+<ul id="productList"></ul>
+
+<script>
+  let products = [
+    {name:"Laptop", category:"electronics"},
+    {name:"Mobile", category:"electronics"},
+    {name:"Headphones", category:"electronics"},
+    {name:"T-Shirt", category:"clothing"},
+    {name:"Jeans", category:"clothing"},
+    {name:"Jacket", category:"clothing"},
+    {name:"Book - Physics", category:"books"},
+    {name:"Book - JavaScript", category:"books"},
+    {name:"Watch", category:"electronics"},
+    {name:"Shoes", category:"clothing"}
+  ];
+
+  let list = document.getElementById("productList");
+  let search = document.getElementById("search");
+
+  function display(items){
+    list.innerHTML = "";
+    items.forEach(p=>{
+      let li = document.createElement("li");
+      li.textContent = p.name + " (" + p.category + ")";
+      list.appendChild(li);
+    });
+  }
+
+  display(products);
+
+  function filterProducts(category){
+    let filtered = category === "all" ? products : products.filter(p=>p.category===category);
+    display(filtered);
+  }
+
+  search.oninput = function(){
+    let text = search.value.toLowerCase();
+    let filtered = products.filter(p=>p.name.toLowerCase().includes(text));
+    display(filtered);
+  }
+</script>
+
+</body>
+</html>

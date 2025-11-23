@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation</title>
+  <style>
+    .error { color: red; font-size: 12px; }
+    .success { color: green; }
+    input { display: block; margin-bottom: 5px; padding: 5px; }
+  </style>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+
+<form id="form">
+  <input type="text" id="name" placeholder="Enter Name">
+  <div id="nameError" class="error"></div>
+
+  <input type="email" id="email" placeholder="Enter Email">
+  <div id="emailError" class="error"></div>
+
+  <input type="password" id="password" placeholder="Enter Password">
+  <div id="passError" class="error"></div>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  let form = document.getElementById("form");
+  let name = document.getElementById("name");
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+
+  let nameErr = document.getElementById("nameError");
+  let emailErr = document.getElementById("emailError");
+  let passErr = document.getElementById("passError");
+
+  form.onsubmit = function(e){
+    e.preventDefault();
+    let valid = true;
+
+    if(name.value.trim() === ""){
+      nameErr.textContent = "Name is required";
+      name.style.border = "2px solid red";
+      valid = false;
+    } else {
+      nameErr.textContent = "";
+      name.style.border = "2px solid green";
+    }
+
+    if(!email.value.includes("@") || email.value.trim() === ""){
+      emailErr.textContent = "Enter valid email";
+      email.style.border = "2px solid red";
+      valid = false;
+    } else {
+      emailErr.textContent = "";
+      email.style.border = "2px solid green";
+    }
+
+    if(password.value.length < 8){
+      passErr.textContent = "Password must be 8 characters";
+      password.style.border = "2px solid red";
+      valid = false;
+    } else {
+      passErr.textContent = "";
+      password.style.border = "2px solid green";
+    }
+
+    if(valid){
+      alert("Form Submitted!");
+    }
+  }
+</script>
+
+</body>
+</html>

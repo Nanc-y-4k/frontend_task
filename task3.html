@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Carousel</title>
+  <style>
+    img {
+      width: 400px;
+      height: 250px;
+      display: block;
+      margin: auto;
+    }
+    button {
+      margin: 10px;
+      padding: 8px 12px;
+    }
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<h2 class="center">Image Carousel</h2>
+
+<div class="center">
+  <img id="slide" src="https://picsum.photos/400/250?random=1">
+  <br>
+  <button onclick="prevImage()">Previous</button>
+  <button onclick="nextImage()">Next</button>
+</div>
+
+<script>
+  let images = [
+    "https://picsum.photos/400/250?random=1",
+    "https://picsum.photos/400/250?random=2",
+    "https://picsum.photos/400/250?random=3",
+    "https://picsum.photos/400/250?random=4",
+    "https://picsum.photos/400/250?random=5"
+  ];
+
+  let index = 0;
+  let slide = document.getElementById("slide");
+  let interval = setInterval(nextImage, 3000);
+
+  function nextImage(){
+    index = (index + 1) % images.length;
+    slide.src = images[index];
+  }
+
+  function prevImage(){
+    index = (index - 1 + images.length) % images.length;
+    slide.src = images[index];
+  }
+
+  slide.onmouseover = function(){
+    clearInterval(interval);
+  }
+
+  slide.onmouseout = function(){
+    interval = setInterval(nextImage, 3000);
+  }
+</script>
+
+</body>
+</html>
